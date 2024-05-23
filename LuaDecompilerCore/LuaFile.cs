@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using LuaDecompilerCore.Utilities;
 
 namespace LuaDecompilerCore
@@ -45,7 +46,11 @@ namespace LuaDecompilerCore
             string ret;
             if (version == LuaVersion.Lua50)
             {
-                ret = br.ReadShiftJIS((int)length - 1);
+                string JISString = br.ReadShiftJIS((int)length - 1);
+                Encoding ShiftJIS = Encoding.GetEncoding(932);
+                byte[] shiftJISBytes = ShiftJIS.GetBytes(JISString);
+                byte[] utf8Bytes = Encoding.Convert(ShiftJIS, Encoding.UTF8, shiftJISBytes);
+                ret = Encoding.UTF8.GetString(utf8Bytes);
             }
             else
             {

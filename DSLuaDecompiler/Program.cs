@@ -115,7 +115,7 @@ namespace DSLuaDecompiler
                 {
                     case LuaFile.LuaVersion.Lua50:
                         result = decompiler.DecompileLuaFunction(new Lua50Decompiler(), main, lua.MainFunction);
-                        outEncoding = Encoding.GetEncoding("shift_jis");
+                        outEncoding = Encoding.UTF8;
                         break;
                     case LuaFile.LuaVersion.Lua51Hks:
                         result = decompiler.DecompileLuaFunction(new HksDecompiler(), main, lua.MainFunction);
